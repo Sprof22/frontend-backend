@@ -1,26 +1,24 @@
+import {BrowserRouter as Link} from 'react-router-dom';
+
 import { useForm} from 'react-hook-form';
+import './Signup.css';
 
 
-const Contact = () => {
+const Signup = () => {
   const { handleSubmit, register, formState: { errors } } = useForm();
   const onSubmit = values => alert('successful');
 
 
   return (
-    <div className='p-8'>
-    <div className="bg-blue-900 flex justify-center items-center flex-col flex-wrap mx-2">
-    
-      <div class='text-white'>
-        <strong class=' text-2xl ' id='title'>Join now!</strong>
-        <p class=''>Get 10,000 FREE</p>
-        </div>
+    <div className='signup-container'>
+    <div className="container ">
 
-        <div className='p-8'>
+      <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div class='m-2 flex justify-between gap-3 ' id='name-div'>
-          <div className='lg:w-1/2 md:w-full sm:w-full'>
-            <input id='first_name' className='p-2 rounded'
-            type='text' placeholder='Username'
+        <h3 className="signup">Sign Up</h3>
+          <div className='firstName'>
+            <input id='first_name' 
+            type='text' placeholder='Enter your first name'
               {...register("firstname", {
                 required: true, maxLength: 15 
               })}
@@ -28,13 +26,20 @@ const Contact = () => {
             {errors.firstname && <p style={{color: 'red'}}>Firstname Required</p>}
 
           </div>
-        </div>
+          <div  className='lastName'>
+            <input id='last_name'
+             type='text' placeholder='Enter your last name'
+              {...register("lastname", {
+                required: true, maxLength: 15
+                })}
+                />
+                {errors.lastname && <p style={{color: 'red'}}>Lastname Required</p>}
+          </div>
 
-
-        <div class='m-2'>
-            <input id='email'  className='p-2 rounded'
+        <div class='email'>
+            <input id='email'
             type='email'
-            placeholder='Email'
+            placeholder='yourname@email.com'
             {
               ...register("email", {
                 required: "Required",
@@ -47,32 +52,36 @@ const Contact = () => {
             {errors.email && <p style={{color: 'red'}}>Email required</p>}
 
         </div>
-          
-        <div  className='m-2 lg:w-1/2 md:w-full sm:w-full'>
-            <input type="password" id="pass" name="password" placeholder='********' className='p-2 rounded'
-            minlength="8" required />
-          </div>
 
-
-        <div class='m-2'>
-          <select name="pets" id="pet-select"  className='p-2 rounded'>
-            <option value="">--Please choose an option--</option>
-            <option value="dog">Teacher</option>
-            <option value="cat">Student</option>
-          </select>
+        <div>
+            <input id='password'
+             name='password' type='password' placeholder="Password"
+            {...register("password", {
+              required: true,
+              pattern: String, 
+            })}
+            />
+          {errors.password && <p style={{color: 'red'}}>Please add your password</p>}              
         </div>
-
-        <div className='flex wrap justify-between'>
-          <p>Terms and Conditions</p>
-          <p>Privacy Policy</p>         
-          <p></p>
+        <div>
+          <input type='checkbox' /> <span>
+            <p>By signing up you agree to the terms and conditions.</p>
+            </span>
         </div>
+      <div className='btn-div'>
         <button id='btn__submit'
-         type='submit' value='submit' class='w-full h-8 text-white p-0 m-2 bg-orange-600 rounded'>
-          Sign Up!
+         type='submit' value='submit' class=''>
+          Sign Up :(
         </button>
-        </form>
+        </div>
 
+        <div className="end-question">
+          <p>Already have account?
+                Log In
+          </p>
+        </div>
+        </form>
+        
     </div>
     </div>
     </div>
@@ -80,5 +89,5 @@ const Contact = () => {
   }
   
   
-  export default Contact;
+  export default Signup;
   
